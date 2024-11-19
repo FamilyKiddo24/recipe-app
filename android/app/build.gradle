@@ -1,0 +1,82 @@
+plugins {
+    id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+gradle.properties['android.enableBuildCache'] = 'false'
+
+android {
+    namespace = "com.example.cooking"
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion = "25.1.8937393"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+        freeCompilerArgs += [
+            '-Xno-param-assertions',
+            '-Xno-call-assertions'
+        ]
+    }
+
+    defaultConfig {
+        applicationId "com.example.cooking"
+        targetSdkVersion 34
+        minSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    tasks.register("mergeSourceSetFolders") {
+        enabled = true
+        outputs.upToDateWhen { false }
+        doNotTrackState("Flutter assets cannot be properly tracked")
+    }
+
+    tasks.register("mergeResources") {
+        doNotTrackState("Disable resource tracking")
+        outputs.upToDateWhen { false }
+    }
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.firebase:firebase-analytics")
+}
+
+flutter {
+    source = "../.."
+}
+
+// Keep only these essential task configurations
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions.suppressWarnings = true
+}
+
+tasks.configureEach { task ->
+    if (task.name.contains('mergeResources')) {
+        task.doNotTrackState("Disable resource tracking")
+        task.outputs.upToDateWhen { false }
+    }
+}

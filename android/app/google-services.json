@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "716398334059",
+    "project_id": "flutter-ios-cooking-app",
+    "storage_bucket": "flutter-ios-cooking-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716398334059:android:4e778a38731ba6ab57e12e",
+        "android_client_info": {
+          "package_name": "com.example.cooking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgeX1bWLxiwUKWD5mBnOETPSOtTlD4yuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
